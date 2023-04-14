@@ -1,5 +1,5 @@
 const { Pokemon, Type } = require("../../db");
-const defaultImage = "https://acortar.link/SOo074";
+const defaultImage = "https://i.postimg.cc/Qdwz52bZ/defaultimage-1.jpg";
 
 let createPokemon = async (
   id,
@@ -16,20 +16,21 @@ let createPokemon = async (
   const findedPoke = await Pokemon.findOne({ where: { name: name } });
   if (findedPoke) {
     throw new Error("That pokemon has already been created");
+  } else {
+    const newpkm = await Pokemon.create({
+      id,
+      name,
+      health,
+      attack,
+      defense,
+      height,
+      weight,
+      speed,
+      types,
+      image: image ? image : defaultImage,
+    });
+    return `Successfully created pokemon, with id: ${newpkm.id} and name: ${newpkm.name}`;
   }
-  await Pokemon.create({
-    id,
-    name,
-    health,
-    attack,
-    defense,
-    height,
-    weight,
-    speed,
-    types,
-    image: image ? image : defaultImage,
-  });
-  return `Successfully created pokemon, with id: ${id}`;
 };
 
 module.exports = createPokemon;

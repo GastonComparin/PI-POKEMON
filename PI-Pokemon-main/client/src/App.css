@@ -1,7 +1,18 @@
+body {
+  margin: 0;
+  text-align: center;
+  background-color: #F4EBD0;
+  position: relative;
+}
+a:link,
+a:visited,
+a:active {
+  text-decoration: none;
+}
+
 .App {
   text-align: center;
 }
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;

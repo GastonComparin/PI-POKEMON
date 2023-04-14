@@ -12,7 +12,7 @@ let updatePokemon = async (
   weight,
   types
 ) => {
-  try {
+  
     let pokemonToUpdate = await Pokemon.findOne({ where: { id: id } });
 
     await pokemonToUpdate.update({
@@ -32,9 +32,7 @@ let updatePokemon = async (
     }
 
     return "Successfully updated pokemon";
-  } catch (error) {
-    return "Error updating pokemon";
-  }
+ 
 };
 
 module.exports = updatePokemon;

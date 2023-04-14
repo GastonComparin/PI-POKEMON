@@ -8,14 +8,15 @@ const getAllPokemons = require("../Handlers/getAllPokemons");
 const createNewPokemon = require("../Handlers/createNewPokemon");
 const deleteMyPokemon = require("../Handlers/deleteMyPokemon");
 const updateMyPokemon = require("../Handlers/updateMyPokemon");
-
+//!MIDDLEWARE
+const validateCreate = require("../Middlewares/ValidateCreate");
 //!RUTAS
 
 pokemonRouter.get("/", getAllPokemons);
 
 pokemonRouter.get("/:id", getPokemonById);
 
-pokemonRouter.post("/", createNewPokemon);
+pokemonRouter.post("/", validateCreate, createNewPokemon);
 
 pokemonRouter.delete("/delete/:id", deleteMyPokemon);
 

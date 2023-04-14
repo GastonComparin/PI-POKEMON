@@ -4,7 +4,6 @@ const typeRouter = Router();
 const pokemonsType = require("../Controllers/Type/pokemonsTypes");
 
 //!RUTAS
-
 typeRouter.get("/", async (req, res) => {
   try {
     let allTypes = await pokemonsType();

@@ -1,0 +1,10 @@
+.contenedor {
+    margin-top: 15px;
+  border: 3px solid #122620;
+  background-color: #a07a32;
+}
+.faltantes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

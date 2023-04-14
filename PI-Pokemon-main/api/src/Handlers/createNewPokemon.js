@@ -14,19 +14,6 @@ const createNewPokemon = async (req, res) => {
     types,
   } = req.body;
 
-  if (
-    !name ||
-    !health ||
-    !attack ||
-    !defense ||
-    !speed ||
-    !height ||
-    !weight ||
-    !types
-  ) {
-    throw new Error("Missing parameters");
-  }
-
   try {
     const newPokemon = await createPokemon(
       id,

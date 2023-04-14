@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
       image: {
         type: DataTypes.STRING,
         defaultvalue:
-          "https://api.triviacreator.com/v1/imgs/quiz/whos_that_pokemon-a5373887-8dd0-449f-8475-d7bc129d767d.webp",
+          "https://i.postimg.cc/Qdwz52bZ/defaultimage-1.jpg",
         allowNull: false,
       },
       health: {
