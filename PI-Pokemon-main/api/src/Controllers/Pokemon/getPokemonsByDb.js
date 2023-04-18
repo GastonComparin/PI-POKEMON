@@ -1,7 +1,8 @@
 const { Pokemon, Type } = require("../../db");
 
 const getPokemonsDb = async () => {
-  const pokemonDb = await Pokemon.findAll();
+  const pokemonDb = await Pokemon.findAll(
+  );
 
   return pokemonDb.map((pokemon) => {
     return {

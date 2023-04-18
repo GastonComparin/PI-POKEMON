@@ -5,7 +5,7 @@ function App() {
   const location = useLocation();
   return (
     <div className="App">
-      <h1>POKEMON</h1>
+      
       <Route exact path="/" component={Landing} />
 
       <Route path="/home" component={Home} />

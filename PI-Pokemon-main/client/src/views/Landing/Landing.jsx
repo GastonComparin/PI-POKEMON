@@ -13,16 +13,11 @@ const Landing = () => {
             <h3>EN HOME</h3>
             <li>1- SearchBar</li>
             <li>
-              2- FILTROS <li>api/bdd</li>
+              2- FILTROS
               <li>tipo</li>
             </li>
-            <li>3- ORDEN</li>
-            <li>ascendente</li>
-            <li>descendente</li>
-            <li>alfabetico</li>
-            <li>ataque</li>
-            <li>4- PAGINADO</li>
-            <li>5- Estilos</li>
+
+            <li>4- Estilos</li>
           </ul>
           <ul>
             <h3>EN DETAIL</h3>
@@ -43,6 +38,10 @@ const Landing = () => {
             <li>Aprender..</li>
           </ul>
         </div>
+        <h1>workflow</h1>
+        <h3>lunes.. filtros y orden // searchbar</h3>
+        <h3>martes.. serachbar // detail</h3>
+        <h3>miercoles.. validacion del form</h3>
       </div>
     </div>
   );
