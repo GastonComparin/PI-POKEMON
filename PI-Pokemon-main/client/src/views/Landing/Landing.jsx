@@ -12,10 +12,7 @@ const Landing = () => {
           <ul>
             <h3>EN HOME</h3>
             <li>1- SearchBar</li>
-            <li>
-              2- FILTROS
-              <li>tipo</li>
-            </li>
+           
 
             <li>4- Estilos</li>
           </ul>

@@ -6,19 +6,40 @@ export const GET_TYPES = "GET_TYPES";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_ATTACK = "ORDER_BY_ATTACK";
 export const GET_POKES_FILTERED_TYPES = "GET_POKES_FILTERED_TYPES";
+export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
+export const SEARCH_BY_ID = "SEARCH_BY_ID";
 //!ACTIONS DE GET
-export const getPokemons = () => {
-  return async function (dispatch) {
-    const apiData = await axios.get("http://localhost:3001/pokemon");
-    const pokemons = apiData.data;
-    dispatch({ type: GET_POKEMONS, payload: pokemons });
-  };
-};
 export const getTypes = () => {
   return async function (dispatch) {
     const apiData = await axios.get("http://localhost:3001/types");
     const types = apiData.data;
     dispatch({ type: GET_TYPES, payload: types });
+  };
+};
+export const getPokemons = () => {
+  return async function (dispatch) {
+    const apiData = await axios.get("http://localhost:3001/pokemon/");
+    const pokemons = apiData.data;
+    dispatch({ type: GET_POKEMONS, payload: pokemons });
+  };
+};
+//!pokemons by name
+export const getPokemonsByName = (payload) => {
+  return async function (dispatch) {
+    const json = await axios.get(
+      "http://localhost:3001/pokemon?name=" + payload
+    );
+    return dispatch({
+      type: SEARCH_BY_NAME,
+      payload: json.data,
+    });
+  };
+};
+//!pokemons by id
+export const getPokemonsById = (payload) => {
+  return async function (dispatch) {
+    const json = await axios.get("http://localhost:3001/pokemon/" + payload);
+    return dispatch({ type: SEARCH_BY_ID, payload: json.data });
   };
 };
 //!ACTIONS DE FILTER

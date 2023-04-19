@@ -7,8 +7,14 @@ const CardsContainer = ({ cardsPerPage, currentPage }) => {
 
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = pokemon.slice(indexOfFirstCard, indexOfLastCard);
+  let currentCards;
+  if (Array.isArray(pokemon)) {
+    currentCards = pokemon.slice(indexOfFirstCard, indexOfLastCard);
+  } else {
+    currentCards = [pokemon];
+  }
 
+ 
   return (
     <div className={style.container}>
       {currentCards.map((poke) => {

@@ -29,7 +29,15 @@ let createPokemon = async (
       types,
       image: image ? image : defaultImage,
     });
-    return `Successfully created pokemon, with id: ${newpkm.id} and name: ${newpkm.name}`;
+    const typeDb = await Type.findAll({
+      where: {
+        name: types,
+      },
+    });
+    newpkm.addType(typeDb);
+    tipo = typeDb.map((elem) => elem.name);
+
+    return `Successfully created pokemon, with id: ${newpkm.id} and type: ${tipo}`;
   }
 };
 

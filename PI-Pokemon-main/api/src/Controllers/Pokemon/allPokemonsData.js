@@ -5,9 +5,8 @@ const getPokemonsByDb = require("./getPokemonsByDb");
 //!funcion
 
 const allPokemonData = async () => {
-  const pokemonApi = await getPokemonsByApi(
-    "https://pokeapi.co/api/v2/pokemon"
-  );
+  const pokemonApi = await getPokemonsByApi();
+
   const PokemonsDb = await getPokemonsByDb();
   const allPokemons = PokemonsDb ? [...pokemonApi, ...PokemonsDb] : pokemonApi;
   return allPokemons;

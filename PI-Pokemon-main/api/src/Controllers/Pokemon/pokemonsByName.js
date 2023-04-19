@@ -3,7 +3,7 @@ const axios = require("axios");
 
 const pokemonsByName = async (name) => {
   const nameDb = await Pokemon.findOne({
-    where: {
+    whereDb: {
       name: { [Op.iLike]: `%${name}%` },
     },
     include: {

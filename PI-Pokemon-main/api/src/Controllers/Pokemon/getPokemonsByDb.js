@@ -1,9 +1,15 @@
 const { Pokemon, Type } = require("../../db");
 
 const getPokemonsDb = async () => {
-  const pokemonDb = await Pokemon.findAll(
-  );
-
+  const pokemonDb = await Pokemon.findAll({
+    include: {
+      model: Type,
+      attributes: ["name"],
+      through: {
+        types: [],
+      },
+    },
+  });
   return pokemonDb.map((pokemon) => {
     return {
       id: pokemon.id,
@@ -15,6 +21,7 @@ const getPokemonsDb = async () => {
       defense: pokemon.defense,
       speed: pokemon.speed,
       image: pokemon.image,
+      types: pokemon.types.map((type) => type.name),
       createdInDb: pokemon.created,
     };
   });

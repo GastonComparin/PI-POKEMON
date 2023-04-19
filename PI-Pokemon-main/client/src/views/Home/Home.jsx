@@ -1,19 +1,22 @@
+import style from "./Home.module.css";
+import Pagination from "./Pagination";
+import Filter from "../../components/Filters/Filter";
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import RefreshButton from "../../components/Refresh/Refresh";
 import {
   getPokemons,
   orderByName,
   orderByAttack,
   getTypes,
 } from "../../redux/actions";
-import style from "./Home.module.css";
-import Pagination from "./Pagination";
-import Filter from "../../components/Filters/Filter";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import NavBar from "../../components/NavBar/NavBar";
 
 const Home = () => {
   const dispatch = useDispatch();
   const [orden, setOrden] = useState("");
+
   //* BAJAR ESTADO
   const pokemon = useSelector((state) => state.pokemon);
   //*PAGINACION
@@ -24,7 +27,6 @@ const Home = () => {
     dispatch(getPokemons());
     dispatch(getTypes());
   }, [dispatch]);
-
 
   //!FUNCIONES
   const handleClick = (event) => {
@@ -47,6 +49,7 @@ const Home = () => {
   return (
     <div className={style.container}>
       <h1>POKEMON</h1>
+      <RefreshButton />
       <Filter />
 
       <label>Ordenar alfabeticamente</label>
@@ -58,7 +61,6 @@ const Home = () => {
         <option value="asc"> ASCENDENTE </option>
         <option value="desc"> DESCENDENTE </option>
       </select>
-
       <label>Ordenar por daño</label>
       <select
         onChange={(event) => {
@@ -68,7 +70,6 @@ const Home = () => {
         <option value="asc"> ASCENDENTE </option>
         <option value="desc"> DESCENDENTE </option>
       </select>
-
       <Pagination
         totalPages={Math.ceil(pokemon.length / cardsPerPage)}
         currentPage={currentPage}

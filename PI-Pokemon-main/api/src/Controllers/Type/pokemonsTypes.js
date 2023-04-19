@@ -11,11 +11,7 @@ const pokemonsType = async () => {
         const url = await axios.get(type.url);
         delete type.url;
         type.id = url.data.id;
-        if (url.data.damage_relations.double_damage_from.length !== 0) {
-          type.debility = url.data.damage_relations.double_damage_from.map(
-            (el) => el.name
-          );
-        }
+
       }
       await Type.bulkCreate(types);
     }

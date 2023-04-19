@@ -17,7 +17,7 @@ const getPokemonsByApi = async (url = `https://pokeapi.co/api/v2/pokemon`) => {
     pokemon.attack = url.data.stats[1].base_stat;
     pokemon.defense = url.data.stats[2].base_stat;
     pokemon.speed = url.data.stats[5].base_stat;
-    pokemon.types = url.data.types.map((el) => el.type.name);
+    pokemon.types = url.data.types.map((pkmtype) => pkmtype.type.name);
     pokemon.image = url.data.sprites.other["official-artwork"].front_default;
     pokemon.createdInDb = false;
   }

@@ -6,6 +6,8 @@ import {
   ORDER_BY_NAME,
   ORDER_BY_ATTACK,
   GET_POKES_FILTERED_TYPES,
+  SEARCH_BY_NAME,
+  SEARCH_BY_ID,
 } from "./actions";
 
 const initialState = {
@@ -24,6 +26,14 @@ const rootReducer = (state = initialState, action) => {
       };
     case GET_TYPES:
       return { ...state, types: action.payload };
+
+    case SEARCH_BY_NAME:
+      return {
+        ...state,
+        pokemon: action.payload,
+      };
+    case SEARCH_BY_ID:
+      return { ...state, pokemon: action.payload };
     //!CASOS DE FILTRADO
     case FILTER_BY_SOURCE:
       if (action.payload === "API") {
@@ -87,7 +97,6 @@ const rootReducer = (state = initialState, action) => {
         pokemon: orderName,
       };
     case ORDER_BY_ATTACK:
-      console.log("estamos en el reducer con", action.payload);
       let orderAttack =
         action.payload === "asc"
           ? state.pokemon.sort(function (a, b) {
@@ -126,13 +135,3 @@ const rootReducer = (state = initialState, action) => {
 export default rootReducer;
 
 //! codigo anteiro
-// case GET_POKES_FILTERED_TYPES:
-
-//       return {
-//         ...state,
-//         pokemon: [
-//           ...state.allPokemonsFilter.filter((poke) => {
-//             return poke.types.includes(action.payload);
-//           }),
-//         ],
-//       };
