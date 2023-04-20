@@ -18,6 +18,7 @@ const CardsContainer = ({ cardsPerPage, currentPage }) => {
   return (
     <div className={style.container}>
       {currentCards.map((poke) => {
+        console.log(poke);
         return (
           <Card
             key={poke.id}
@@ -26,7 +27,7 @@ const CardsContainer = ({ cardsPerPage, currentPage }) => {
             health={poke.health}
             attack={poke.attack}
             image={poke.image}
-            types={poke.types}
+            types={poke.types.join("-")}
           />
         );
       })}

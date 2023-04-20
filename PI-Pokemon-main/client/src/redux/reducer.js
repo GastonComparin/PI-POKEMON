@@ -5,7 +5,7 @@ import {
   GET_TYPES,
   ORDER_BY_NAME,
   ORDER_BY_ATTACK,
-  GET_POKES_FILTERED_TYPES,
+  FILTER_BY_TYPE,
   SEARCH_BY_NAME,
   SEARCH_BY_ID,
 } from "./actions";
@@ -14,6 +14,7 @@ const initialState = {
   pokemon: [],
   types: [],
   allPokemonsFilter: [],
+  pokemonDetail: [],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -26,7 +27,12 @@ const rootReducer = (state = initialState, action) => {
       };
     case GET_TYPES:
       return { ...state, types: action.payload };
-
+    case GET_POKEMON_DETAIL:
+      return {
+        ...state,
+        pokemonDetail: action.payload,
+      };
+    //!CASOS SEARCH
     case SEARCH_BY_NAME:
       return {
         ...state,
@@ -56,7 +62,7 @@ const rootReducer = (state = initialState, action) => {
           pokemon: state.allPokemonsFilter.map((g) => g),
         };
       }
-    case GET_POKES_FILTERED_TYPES:
+    case FILTER_BY_TYPE:
       let filteredPokemons;
       if (action.payload === "TODOS") {
         filteredPokemons = state.allPokemonsFilter;
@@ -121,13 +127,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pokemon: orderAttack,
       };
-    //!CASO DE DETALLE
-    case GET_POKEMON_DETAIL:
-      return {
-        ...state,
-        pokemonDetail: action.payload,
-      };
-
     default:
       return { ...state };
   }

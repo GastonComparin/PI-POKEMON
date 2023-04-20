@@ -1,6 +1,7 @@
 import style from "./Home.module.css";
 import Pagination from "./Pagination";
 import Filter from "../../components/Filters/Filter";
+
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
 import RefreshButton from "../../components/Refresh/Refresh";
 import {
@@ -11,7 +12,7 @@ import {
 } from "../../redux/actions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NavBar from "../../components/NavBar/NavBar";
+
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -51,7 +52,7 @@ const Home = () => {
       <h1>POKEMON</h1>
       <RefreshButton />
       <Filter />
-
+    
       <label>Ordenar alfabeticamente</label>
       <select
         onChange={(event) => {

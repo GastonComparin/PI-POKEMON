@@ -1,4 +1,4 @@
-import { filterSource, getPokesFilteredTypes } from "../../redux/actions";
+import { filterSource, filterType } from "../../redux/actions";
 import style from "./Filter.module.css";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,7 +11,7 @@ const Filter = () => {
   };
 
   const getTypesFiltered = (event) => {
-    dispatch(getPokesFilteredTypes(event.target.value));
+    dispatch(filterType(event.target.value));
   };
 
   return (

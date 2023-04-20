@@ -38,7 +38,8 @@ const Landing = () => {
         <h1>workflow</h1>
         <h3>lunes.. filtros y orden // searchbar</h3>
         <h3>martes.. serachbar // detail</h3>
-        <h3>miercoles.. validacion del form</h3>
+        <h3>miercoles.. detail</h3>
+        <h3>jueves.. validacion del form</h3>
       </div>
     </div>
   );
