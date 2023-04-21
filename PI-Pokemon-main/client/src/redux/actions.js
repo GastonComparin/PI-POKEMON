@@ -8,6 +8,9 @@ export const ORDER_BY_ATTACK = "ORDER_BY_ATTACK";
 export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const SEARCH_BY_ID = "SEARCH_BY_ID";
+export const CLEAN_DETAIL = "CLEAN_DETAIL";
+export const DELETE_POKEMON = "DELETE_POKEMON";
+
 //!ACTIONS DE GET
 export const getTypes = () => {
   return async function (dispatch) {
@@ -49,6 +52,10 @@ export const getPokemonDetail = (id) => {
     dispatch({ type: GET_POKEMON_DETAIL, payload: pokemon });
   };
 };
+//! ACTION CLEAN
+export const cleanDetail = () => {
+  return { type: CLEAN_DETAIL };
+};
 //!ACTIONS DE FILTER
 export const filterSource = (payload) => {
   return {
@@ -72,4 +79,12 @@ export const orderByAttack = (payload) => {
     payload,
   };
 };
-
+//!ACTION DELETE
+export const deletePokemon = (id) => {
+  return async function () {
+    const deleted = await axios.delete(
+      `http://localhost:3001/pokemon/delete/${id}`
+    );
+    return deleted;
+  };
+};

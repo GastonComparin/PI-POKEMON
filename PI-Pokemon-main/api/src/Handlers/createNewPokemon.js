@@ -27,9 +27,14 @@ const createNewPokemon = async (req, res) => {
       weight,
       types
     );
-    res.status(201).json(newPokemon);
+    res
+      .status(201)
+      .json({
+        message: "El pokemon se creó correctamente",
+        pokemon: newPokemon,
+      });
   } catch (error) {
-    res.status(400).json({ erorr: error.message });
+    res.status(400).json("Hubo un error creando el pokemon");
   }
 };
 module.exports = createNewPokemon;

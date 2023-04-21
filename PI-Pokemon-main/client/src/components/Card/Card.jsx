@@ -8,7 +8,7 @@ const Card = (props) => {
         <p className={style.p}> {props.name}</p>
       </Link>
       <p className={style.p}>{props.types}</p>
-      <img src={props.image} alt="Pokemon " />
+      <img src={props.image} alt="Pokemon " className={style.image} />
     </div>
   );
 };

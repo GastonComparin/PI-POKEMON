@@ -18,7 +18,7 @@ const CardsContainer = ({ cardsPerPage, currentPage }) => {
   return (
     <div className={style.container}>
       {currentCards.map((poke) => {
-        console.log(poke);
+       
         return (
           <Card
             key={poke.id}

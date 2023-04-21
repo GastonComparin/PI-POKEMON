@@ -1,0 +1,50 @@
+.container {
+  margin-left: 37%;
+  height: fit-content;
+  border: 3px solid #122620;
+  width: 330px;
+  display: flex;
+  flex-direction: column;
+  background-color: #b68d40;
+}
+.dataContainer {
+  padding-top: 7px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: fit-content;
+}
+.campo {
+  margin-top: 7px;
+  margin-bottom: 7px;
+  text-transform: uppercase;
+  color: #d6ad60;
+  background-color: #122620;
+  padding-bottom: 10px;
+}
+.label {
+}
+.input {
+}
+.titulo {
+  margin-left: 37%;
+  width: 330px;
+  border: 3px solid #122620;
+  background-color: #b68d40;
+}
+.button {
+  margin-top: 7px;
+  text-transform: uppercase;
+  color: #d6ad60;
+  background-color: #122620;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #d6ad60;
+  color: #122620;
+}
+.viewPokemonBtn {
+position: fixed;
+top:100px;
+left:700px;
+}

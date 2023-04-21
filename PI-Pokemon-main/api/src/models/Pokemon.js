@@ -22,29 +22,25 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       health: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       attack: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       defense: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       speed: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
       },
       height: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
       },
       weight: {
-        type: DataTypes.INTEGER,
-      },
-      abilities: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
-        allowNull: true,
+        type: DataTypes.STRING,
       },
       created: {
         type: DataTypes.BOOLEAN,

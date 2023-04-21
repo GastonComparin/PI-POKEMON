@@ -54,12 +54,17 @@
   align-items: center;
 }
 .close {
-  position: fixed;
-  top: 75px;
-  left: 460px;
+  
 
   background-color: #122620;
   border-radius: 15px;
   color: #d6ad60;
   cursor: pointer;
+}
+.loading{
+   color: red;
+   position: fixed;
+   top: 200px;
+   left:800px;
+   
 }

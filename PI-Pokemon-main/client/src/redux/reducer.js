@@ -8,6 +8,8 @@ import {
   FILTER_BY_TYPE,
   SEARCH_BY_NAME,
   SEARCH_BY_ID,
+  CLEAN_DETAIL,
+  DELETE_POKEMON,
 } from "./actions";
 
 const initialState = {
@@ -31,6 +33,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemonDetail: action.payload,
+      };
+    case CLEAN_DETAIL:
+      return {
+        ...state,
+        pokemonDetail: {},
       };
     //!CASOS SEARCH
     case SEARCH_BY_NAME:
@@ -127,10 +134,17 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pokemon: orderAttack,
       };
+
+    case DELETE_POKEMON:
+      return {
+        ...state,
+        pokemon: state.pokemon.filter((el) => el.id !== action.payload),
+        allPokemonsFilter: state.allPokemonsFilter.filter(
+          (el) => el.id !== action.payload
+        ),
+      };
     default:
       return { ...state };
   }
 };
 export default rootReducer;
-
-//! codigo anteiro

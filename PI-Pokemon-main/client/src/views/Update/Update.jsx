@@ -1,8 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
-import { validate } from "./Validation";
-import style from "./Form.module.css";
-const Form = () => {
+import { validate } from "../Form/Validation";
+import style from "./Update.module.css";
+
+const Update = () => {
+  const currentUrl = window.location.href;
+  const id = currentUrl.split("/").pop();
+
   const [form, setForm] = useState({
     name: "",
     health: "",
@@ -36,13 +40,15 @@ const Form = () => {
   };
   const submitHandler = (event) => {
     event.preventDefault();
+    console.log(object);
     axios
-      .post("http://localhost:3001/pokemon", form)
+      .put(`http://localhost:3001/pokemon/update/`, object)
       .then((res) => {
         const message = res.data.pokemon;
         const regex = /with id: ([\w-]+)/;
         const match = regex.exec(message);
         const id = match[1];
+
         alert("Pokemon creado correctamente");
         const viewPokemonBtn = document.createElement("a");
         viewPokemonBtn.setAttribute("href", `detail/${id}`);
@@ -56,20 +62,44 @@ const Form = () => {
           error.response.data.errors
         ) {
           const errors = error.response.data.errors;
-          // Mostrar errores en la consola para depuración
-          console.log(errors);
           alert("Debe completar los campos obligatorios");
         } else {
-          alert(`Error: ${error.message}`);
+          alert(`Pokemon actualizado correctamente`);
         }
       });
   };
+  const object = {
+    id: id,
+    name: form.name,
+    health: form.health,
+    attack: form.attack,
+    defense: form.defense,
+    speed: form.speed,
+    height: form.height,
+    weight: form.weight,
+    types: form.types,
+    image: form.image,
+  };
+
   return (
     <div>
-      <h1 className={style.titulo}>Create your Pokemon!</h1>
+      <h1 className={style.titulo}>Update your Pokemon!</h1>
       <div className={style.container}>
         <form onSubmit={submitHandler}>
           <div className={style.dataContainer}>
+            <div className={style.campo}>
+              <label className={style.label}>ID</label>
+              <br />
+              <input
+                className={style.input}
+                name="id"
+                type="text"
+                value={`${id}`}
+                onChange={changeHandler}
+                readOnly={true}
+              />
+              {errors.id && <div style={{ color: "red" }}>{errors.id}</div>}
+            </div>
             <div className={style.campo}>
               <label className={style.label}>Name</label>
               <br />
@@ -194,8 +224,7 @@ const Form = () => {
           </div>
         </form>
       </div>
-      
     </div>
   );
 };
-export default Form;
+export default Update;

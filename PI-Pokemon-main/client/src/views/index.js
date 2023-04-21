@@ -4,4 +4,5 @@ import Form from "./Form/Form";
 import Detail from "./Detail/Detail";
 import About from "./About/About";
 import NavBar from "../components/NavBar/NavBar";
-export { Home, Landing, Form, Detail, About, NavBar };
+import Update from "./Update/Update";
+export { Home, Landing, Form, Detail, About, NavBar, Update };
