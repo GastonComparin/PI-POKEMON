@@ -17,7 +17,9 @@ const initialState = {
   types: [],
   allPokemonsFilter: [],
   pokemonDetail: [],
+  doubleFilter: [],
 };
+
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     //!CASOS GET
@@ -26,6 +28,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pokemon: action.payload,
         allPokemonsFilter: action.payload,
+        doubleFilter: [],
       };
     case GET_TYPES:
       return { ...state, types: action.payload };
@@ -49,90 +52,150 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, pokemon: action.payload };
     //!CASOS DE FILTRADO
     case FILTER_BY_SOURCE:
-      if (action.payload === "API") {
+      if (!state.doubleFilter.length > 0) {
+        let filteredPokemons;
+        if (action.payload === "ALL") {
+          filteredPokemons = state.allPokemonsFilter;
+          return {
+            ...state,
+            pokemon: filteredPokemons,
+          };
+        } else if (action.payload === "API") {
+          filteredPokemons = state.allPokemonsFilter.filter(
+            (poke) => !isNaN(poke.id)
+          );
+          return {
+            ...state,
+            pokemon: filteredPokemons,
+          };
+        } else if (action.payload === "DB") {
+          filteredPokemons = state.allPokemonsFilter.filter((poke) =>
+            isNaN(poke.id)
+          );
+          return {
+            ...state,
+            pokemon: filteredPokemons,
+          };
+        }
         return {
           ...state,
-          pokemon: [
-            ...state.allPokemonsFilter.filter((poke) => !isNaN(poke.id)),
-          ],
-        };
-      } else if (action.payload === "DB") {
-        return {
-          ...state,
-          pokemon: [
-            ...state.allPokemonsFilter.filter((poke) => isNaN(poke.id)),
-          ],
+          doubleFilter: [...filteredPokemons],
         };
       } else {
+        let filteredPokemons;
+        if (action.payload === "ALL") {
+          filteredPokemons = state.doubleFilter;
+          return {
+            ...state,
+            pokemon: filteredPokemons,
+          };
+        }
+        if (action.payload === "API") {
+          filteredPokemons = state.doubleFilter.filter(
+            (poke) => !isNaN(poke.id)
+          );
+          return {
+            ...state,
+            pokemon: filteredPokemons,
+          };
+        } else if (action.payload === "DB") {
+          filteredPokemons = state.doubleFilter.filter((poke) =>
+            isNaN(poke.id)
+          );
+          return {
+            ...state,
+            pokemon: filteredPokemons,
+          };
+        }
         return {
           ...state,
-          pokemon: state.allPokemonsFilter.map((g) => g),
+          pokemon: [...filteredPokemons],
+          doubleFilter: [...filteredPokemons],
         };
       }
+
     case FILTER_BY_TYPE:
-      let filteredPokemons;
-      if (action.payload === "TODOS") {
-        filteredPokemons = state.allPokemonsFilter;
+      if (!state.doubleFilter.length > 0) {
+        let filteredPokemons;
+        if (action.payload === "ALL") {
+          filteredPokemons = state.allPokemonsFilter;
+        } else {
+          filteredPokemons = state.allPokemonsFilter.filter((poke) => {
+            return poke.types.includes(action.payload);
+          });
+        }
+        return {
+          ...state,
+          pokemon: [...filteredPokemons],
+          doubleFilter: [...filteredPokemons],
+        };
       } else {
-        filteredPokemons = state.allPokemonsFilter.filter((poke) => {
-          return poke.types.includes(action.payload);
-        });
+        let filteredPokemons;
+        if (action.payload === "ALL") {
+          filteredPokemons = state.allPokemonsFilter;
+        } else {
+          filteredPokemons = state.allPokemonsFilter.filter((poke) => {
+            return poke.types.includes(action.payload);
+          });
+        }
+        return {
+          ...state,
+          pokemon: [...filteredPokemons],
+          doubleFilter: [...filteredPokemons],
+        };
       }
-      return {
-        ...state,
-        pokemon: [...filteredPokemons],
-      };
 
     //!CASOS DE ORDEN
     case ORDER_BY_NAME:
-      let orderName =
-        action.payload === "asc"
-          ? state.pokemon.sort(function (a, b) {
-              if (a.name > b.name) {
-                return 1;
-              }
-              if (b.name > a.name) {
-                return -1;
-              }
-              return 0;
-            })
-          : state.pokemon.sort(function (a, b) {
-              if (a.name > b.name) {
-                return -1;
-              }
-              if (b.name > a.name) {
-                return 1;
-              }
-              return 0;
-            });
+      let orderName;
+      action.payload === "asc"
+        ? (orderName = state.pokemon.sort(function (a, b) {
+            if (a.name > b.name) {
+              return 1;
+            }
+            if (b.name > a.name) {
+              return -1;
+            }
+            return 0;
+          }))
+        : (orderName = state.pokemon.sort(function (a, b) {
+            if (a.name > b.name) {
+              return -1;
+            }
+            if (b.name > a.name) {
+              return 1;
+            }
+            return 0;
+          }));
       return {
         ...state,
-        pokemon: orderName,
+        pokemon: [...orderName],
       };
     case ORDER_BY_ATTACK:
-      let orderAttack =
-        action.payload === "asc"
-          ? state.pokemon.sort(function (a, b) {
-              if (a.attack > b.attack) {
-                return -1;
-              }
-              if (b.attack > a.attack) {
-                return 1;
-              }
-              return 0;
-            })
-          : state.pokemon.sort(function (a, b) {
-              if (a.attack > b.attack) {
-                return 1;
-              }
-              if (b.attack > a.attack) {
-                return -1;
-              }
-              return 0;
-            });
+      let orderAttack;
+      action.payload === "asc"
+        ? (orderAttack = state.pokemon.sort(function (a, b) {
+            if (a.attack > b.attack) {
+              return -1;
+            }
+            if (b.attack > a.attack) {
+              return 1;
+            }
+            return 0;
+          }))
+        : (orderAttack = state.pokemon.sort(function (a, b) {
+            if (a.attack > b.attack) {
+              return 1;
+            }
+            if (b.attack > a.attack) {
+              return -1;
+            }
+            return 0;
+          }));
+
       return {
         ...state,
-        pokemon: orderAttack,
+        pokemon: [...orderAttack],
       };
 
     case DELETE_POKEMON:

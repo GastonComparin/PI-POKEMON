@@ -9,9 +9,7 @@ const RefreshButton = () => {
     dispatch(getPokemons());
   };
 
-  return (
-    <button onClick={handleClick}>Restablecer</button>
-  );
+  return <button onClick={handleClick}>Restablecer</button>;
 };
 
 export default RefreshButton;

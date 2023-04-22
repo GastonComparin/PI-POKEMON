@@ -14,11 +14,9 @@ const CardsContainer = ({ cardsPerPage, currentPage }) => {
     currentCards = [pokemon];
   }
 
- 
   return (
     <div className={style.container}>
       {currentCards.map((poke) => {
-       
         return (
           <Card
             key={poke.id}

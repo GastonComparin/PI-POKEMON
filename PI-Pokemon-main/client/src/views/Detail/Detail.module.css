@@ -54,17 +54,35 @@
   align-items: center;
 }
 .close {
-  
-
+  position: fixed;
+  top: 75px;
+  left: 500px;
   background-color: #122620;
   border-radius: 15px;
   color: #d6ad60;
   cursor: pointer;
 }
-.loading{
-   color: red;
-   position: fixed;
-   top: 200px;
-   left:800px;
-   
+.delete {
+  position: fixed;
+  top: 75px;
+  left: 580px;
+  background-color: #122620;
+  border-radius: 15px;
+  color: #d6ad60;
+  cursor: pointer;
+}
+.modify {
+  position: fixed;
+  top: 75px;
+  left: 660px;
+  background-color: #122620;
+  border-radius: 15px;
+  color: #d6ad60;
+  cursor: pointer;
+}
+.loading {
+  color: red;
+  position: fixed;
+  top: 200px;
+  left: 650px;
 }

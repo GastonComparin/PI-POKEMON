@@ -6,6 +6,7 @@ const Filter = () => {
   const dispatch = useDispatch();
 
   const types = useSelector((state) => state.types);
+
   const handleFilterCreated = (event) => {
     dispatch(filterSource(event.target.value));
   };
@@ -19,18 +20,24 @@ const Filter = () => {
       <label className={style.label}>SOURCE: </label>
 
       <select
+        id="filterSource"
         className={style.select}
         onChange={(e) => {
           handleFilterCreated(e);
         }}
       >
+        <option>ALL</option>
         <option>API</option>
         <option>DB</option>
       </select>
 
       <label className={style.label}>TYPE: </label>
-      <select onChange={getTypesFiltered} className={style.select}>
-        <option>TODOS</option>
+      <select
+        id="filterType"
+        onChange={getTypesFiltered}
+        className={style.select}
+      >
+        <option>ALL</option>
         {types.map((types) => {
           return (
             <option key={types.name} value={types.name}>

@@ -33,18 +33,20 @@ const Detail = () => {
           <Link to="/home">
             <button className={style.close}>BACK</button>
           </Link>
+
           {isNaN(pokemon.id) ? (
             <Link to="/home">
-              <button onClick={handleDelete} className={style.close}>
+              <button onClick={handleDelete} className={style.delete}>
                 DELETE
               </button>
             </Link>
           ) : (
             <div />
           )}
+
           {isNaN(pokemon.id) ? (
             <Link to={`/update/${pokemon.id}`}>
-              <button className={style.close}>MODIFY</button>
+              <button className={style.modify}>MODIFY</button>
             </Link>
           ) : (
             <div />
