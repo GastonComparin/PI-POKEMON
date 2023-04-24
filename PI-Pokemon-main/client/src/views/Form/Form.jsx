@@ -56,8 +56,7 @@ const Form = () => {
           error.response.data.errors
         ) {
           const errors = error.response.data.errors;
-          // Mostrar errores en la consola para depuración
-          console.log(errors);
+      
           alert("Debe completar los campos obligatorios");
         } else {
           alert(`Error: ${error.message}`);

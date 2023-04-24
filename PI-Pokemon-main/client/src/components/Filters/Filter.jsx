@@ -7,7 +7,7 @@ const Filter = () => {
 
   const types = useSelector((state) => state.types);
 
-  const handleFilterCreated = (event) => {
+  const handleFilterSource = (event) => {
     dispatch(filterSource(event.target.value));
   };
 
@@ -23,7 +23,7 @@ const Filter = () => {
         id="filterSource"
         className={style.select}
         onChange={(e) => {
-          handleFilterCreated(e);
+          handleFilterSource(e);
         }}
       >
         <option>ALL</option>

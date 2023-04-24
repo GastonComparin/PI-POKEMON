@@ -13,6 +13,9 @@ function App() {
 
       <Route path="/update" component={Update} />
 
+      <Route path="/updateall" component={Home} />
+
+
       <Route path="/detail/:id" component={Detail} />
 
       <Route path="/about" component={About} />

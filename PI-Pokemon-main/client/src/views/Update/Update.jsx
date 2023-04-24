@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { validate } from "../Form/Validation";
-import style from "./Update.module.css";
+import style from "../Form/Form.module.css";
+import { useSelector } from "react-redux";
 
 const Update = () => {
   const currentUrl = window.location.href;
   const id = currentUrl.split("/").pop();
+  const willModify = useSelector((state) => state.modifiedPokemon);
 
   const [form, setForm] = useState({
     name: "",
@@ -18,6 +20,19 @@ const Update = () => {
     types: [],
     image: "",
   });
+  useEffect(() => {
+    setForm({
+      name: willModify.name,
+      health: willModify.health,
+      attack: willModify.attack,
+      defense: willModify.defense,
+      speed: willModify.speed,
+      height: willModify.height,
+      weight: willModify.weight,
+      types: willModify.types,
+      image: willModify.image,
+    });
+  }, [willModify]);
 
   const [errors, setErrors] = useState({
     name: "",
@@ -40,7 +55,6 @@ const Update = () => {
   };
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(object);
     axios
       .put(`http://localhost:3001/pokemon/update/`, object)
       .then((res) => {

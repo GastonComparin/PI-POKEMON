@@ -3,6 +3,7 @@ import {
   cleanDetail,
   getPokemonDetail,
   deletePokemon,
+  modifyPokemon,
 } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -25,6 +26,9 @@ const Detail = () => {
     dispatch(deletePokemon(id));
     return alert("Pokemon eliminado correctamente");
   };
+  const handleModify = (id) => {
+    dispatch(modifyPokemon(pokemon.id));
+  };
 
   return (
     <div>
@@ -33,7 +37,6 @@ const Detail = () => {
           <Link to="/home">
             <button className={style.close}>BACK</button>
           </Link>
-
           {isNaN(pokemon.id) ? (
             <Link to="/home">
               <button onClick={handleDelete} className={style.delete}>
@@ -43,10 +46,11 @@ const Detail = () => {
           ) : (
             <div />
           )}
-
           {isNaN(pokemon.id) ? (
             <Link to={`/update/${pokemon.id}`}>
-              <button className={style.modify}>MODIFY</button>
+              <button onClick={handleModify} className={style.modify}>
+                MODIFY
+              </button>
             </Link>
           ) : (
             <div />
@@ -57,7 +61,6 @@ const Detail = () => {
               <p className={style.titulo}> {pokemon?.types}</p>
               <p className={style.titulo}> {pokemon?.name}</p>
             </div>
-
             <div className={style.container}>
               <img src={pokemon.image} alt="pokemon" className={style.image} />
               <div className={style.containerStats}>

@@ -8,6 +8,8 @@ const CardsContainer = ({ cardsPerPage, currentPage }) => {
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
   let currentCards;
+
+  
   if (Array.isArray(pokemon)) {
     currentCards = pokemon.slice(indexOfFirstCard, indexOfLastCard);
   } else {

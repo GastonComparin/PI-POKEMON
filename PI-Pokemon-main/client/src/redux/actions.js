@@ -10,6 +10,7 @@ export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const SEARCH_BY_ID = "SEARCH_BY_ID";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const DELETE_POKEMON = "DELETE_POKEMON";
+export const MODIFY_POKEMON = "MODIFY_POKEMON";
 
 //!ACTIONS DE GET
 export const getTypes = () => {
@@ -87,5 +88,12 @@ export const deletePokemon = (id) => {
       `http://localhost:3001/pokemon/delete/${id}`
     );
     return deleted;
+  };
+};
+//!ACTION MODIFY
+export const modifyPokemon = (id) => {
+  return async function (dispatch) {
+    const modified = await axios.get(`http://localhost:3001/pokemon/${id}`);
+    return dispatch({ type: MODIFY_POKEMON, payload: modified.data });
   };
 };

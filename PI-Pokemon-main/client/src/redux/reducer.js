@@ -10,6 +10,7 @@ import {
   SEARCH_BY_ID,
   CLEAN_DETAIL,
   DELETE_POKEMON,
+  MODIFY_POKEMON,
 } from "./actions";
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
   allPokemonsFilter: [],
   pokemonDetail: [],
   doubleFilter: [],
+  modifiedPokemon: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -144,7 +146,6 @@ const rootReducer = (state = initialState, action) => {
           doubleFilter: [...filteredPokemons],
         };
       }
-
     //!CASOS DE ORDEN
     case ORDER_BY_NAME:
       let orderName;
@@ -205,6 +206,11 @@ const rootReducer = (state = initialState, action) => {
         allPokemonsFilter: state.allPokemonsFilter.filter(
           (el) => el.id !== action.payload
         ),
+      };
+    case MODIFY_POKEMON:
+      state.modifiedPokemon = action.payload;
+      return {
+        ...state,
       };
     default:
       return { ...state };
