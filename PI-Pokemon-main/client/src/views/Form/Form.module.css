@@ -22,10 +22,6 @@
   background-color: #122620;
   padding-bottom: 10px;
 }
-.label {
-}
-.input {
-}
 .titulo {
   margin-left: 37%;
   width: 330px;
@@ -44,7 +40,11 @@
   color: #122620;
 }
 .viewPokemonBtn {
-position: fixed;
-top:100px;
-left:700px;
+  position: fixed;
+  top: 100px;
+  left: 700px;
+}
+
+.campoid {
+  display: none;
 }

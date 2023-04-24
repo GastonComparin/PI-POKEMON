@@ -9,7 +9,6 @@ const CardsContainer = ({ cardsPerPage, currentPage }) => {
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
   let currentCards;
 
-  
   if (Array.isArray(pokemon)) {
     currentCards = pokemon.slice(indexOfFirstCard, indexOfLastCard);
   } else {
@@ -18,19 +17,23 @@ const CardsContainer = ({ cardsPerPage, currentPage }) => {
 
   return (
     <div className={style.container}>
-      {currentCards.map((poke) => {
-        return (
-          <Card
-            key={poke.id}
-            id={poke.id}
-            name={poke.name}
-            health={poke.health}
-            attack={poke.attack}
-            image={poke.image}
-            types={poke.types.join("-")}
-          />
-        );
-      })}
+      {currentCards.length === 0 ? (
+        <p className={style.p}>No hay pokemones creados por el usuario</p>
+      ) : (
+        currentCards.map((poke) => {
+          return (
+            <Card
+              key={poke.id}
+              id={poke.id}
+              name={poke.name}
+              health={poke.health}
+              attack={poke.attack}
+              image={poke.image}
+              types={poke.types.join("-")}
+            />
+          );
+        })
+      )}
     </div>
   );
 };

@@ -6,8 +6,11 @@
   justify-content: center;
   align-items: center;
   background-color: #d6ad60;
+  cursor: pointer;
 }
 .label {
   font-weight: 600;
+  margin: 20px;
+
 }
 

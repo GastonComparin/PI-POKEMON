@@ -101,7 +101,7 @@ const Update = () => {
       <div className={style.container}>
         <form onSubmit={submitHandler}>
           <div className={style.dataContainer}>
-            <div className={style.campo}>
+            <div className={style.campoid}>
               <label className={style.label}>ID</label>
               <br />
               <input
@@ -111,6 +111,7 @@ const Update = () => {
                 value={`${id}`}
                 onChange={changeHandler}
                 readOnly={true}
+                
               />
               {errors.id && <div style={{ color: "red" }}>{errors.id}</div>}
             </div>

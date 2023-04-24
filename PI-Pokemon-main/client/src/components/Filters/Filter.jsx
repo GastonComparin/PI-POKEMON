@@ -17,7 +17,7 @@ const Filter = () => {
 
   return (
     <div>
-      <label className={style.label}>SOURCE: </label>
+      <label className={style.label}>Source: </label>
 
       <select
         id="filterSource"
@@ -31,7 +31,7 @@ const Filter = () => {
         <option>DB</option>
       </select>
 
-      <label className={style.label}>TYPE: </label>
+      <label className={style.label}>Type: </label>
       <select
         id="filterType"
         onChange={getTypesFiltered}

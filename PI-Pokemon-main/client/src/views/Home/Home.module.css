@@ -1,5 +1,29 @@
 .container {
-  background-color: #f4ebd0;
+  
   margin-left: 8%;
   border-top: 3px solid #122620;
+  background-color: #b68d40;
+}
+.optionsContainer {
+  background-color: #f4ebd0;
+}
+.options {
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #d6ad60;
+  background-color: #122620;
+  margin: 10px;
+  border: 3px solid #b68d40;
+  border-radius: 10px;
+}
+.movement {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #122620;
+  align-items: center;
+  border-radius: 10px;
+ 
 }

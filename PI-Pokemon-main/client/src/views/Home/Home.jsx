@@ -37,18 +37,27 @@ const Home = ({ match }) => {
           <h1>POKEMON</h1>
           <div>
             <div className={style.container}>
-              <RefreshButton />
-              <Filter />
-              <Order />
-              <Pagination
-                totalPages={Math.ceil(pokemon.length / cardsPerPage)}
-                currentPage={currentPage}
-                handleClick={handleClick}
-              />
+              
+             
+                <div className={style.options}>
+                  <Filter />
+                  <Order />
+                </div>
+              <div className={style.movement}>
+                <Pagination
+                  totalPages={Math.ceil(pokemon.length / cardsPerPage)}
+                  currentPage={currentPage}
+                  handleClick={handleClick}
+                />
+                <RefreshButton />
+              </div>
+              <div className={style.optionsContainer}>
               <CardsContainer
                 cardsPerPage={cardsPerPage}
                 currentPage={currentPage}
+                isFiltered={match.params.source === "DB"}
               />
+            </div>
             </div>
           </div>
         </div>

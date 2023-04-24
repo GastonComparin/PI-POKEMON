@@ -12,9 +12,15 @@
   background-color: #122620;
   color: #d6ad60;
 }
+.name {
+  text-transform: uppercase;
+  background-color: #122620;
+  color: #d6ad60;
+}
 .container img {
   max-width: 100%;
 }
 .image{
   filter: drop-shadow(10px 5px 8px);
 }
+

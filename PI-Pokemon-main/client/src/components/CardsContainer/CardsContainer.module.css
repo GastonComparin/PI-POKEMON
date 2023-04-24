@@ -4,3 +4,11 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
+.p{
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: large;
+  color: #d6ad60;
+  background-color: #122620;
+  width: 450px;
+}

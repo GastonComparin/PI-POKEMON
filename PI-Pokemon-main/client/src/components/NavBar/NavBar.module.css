@@ -23,11 +23,11 @@ a:hover {
   background-color: #122620;
   border-radius: 15px;
   margin-left: 12px;
-
   margin-right: 12px;
   cursor: pointer;
 }
 .botones:hover {
   border: 1px solid #122620;
   background-color: #d6ad60;
+  transition: all 0.4s ease-in-out;
 }

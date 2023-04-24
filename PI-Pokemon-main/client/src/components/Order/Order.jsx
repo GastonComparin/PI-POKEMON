@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { orderByName, orderByAttack } from "../../redux/actions";
-
+import style from "../Filters/Filter.module.css";
 const Order = () => {
   const dispatch = useDispatch();
   const [orden, setOrden] = useState("");
@@ -19,23 +19,29 @@ const Order = () => {
   };
   return (
     <div>
-      <label>Ordenar alfabeticamente</label>
+      <label className={style.label}>Sort alph.</label>
       <select
+        className={style.select}
         onChange={(event) => {
           handleOrderName(event);
         }}
       >
-        <option value="asc"> ASCENDENTE </option>
-        <option value="desc"> DESCENDENTE </option>
+        <option>UNSORTED</option>
+        <option value="asc"> A-Z </option>
+        <option value="desc"> Z-A </option>
       </select>
-      <label>Ordenar por daño</label>
+
+
+      <label className={style.label}>Sort by AP</label>
       <select
+        className={style.select}
         onChange={(event) => {
           handleOrderAttack(event);
         }}
       >
-        <option value="asc"> ASCENDENTE </option>
-        <option value="desc"> DESCENDENTE </option>
+        <option>UNSORTED</option>
+        <option value="asc"> 0 - 100 </option>
+        <option value="desc"> 100 - 0 </option>
       </select>
     </div>
   );
