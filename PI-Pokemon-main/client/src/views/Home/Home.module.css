@@ -1,5 +1,4 @@
 .container {
-  
   margin-left: 8%;
   border-top: 3px solid #122620;
   background-color: #b68d40;
@@ -25,5 +24,19 @@
   border-bottom: 3px solid #122620;
   align-items: center;
   border-radius: 10px;
- 
+}
+.gif {
+  overflow: hidden;
+  width: 580px;
+  height: 500px;
+  margin-left: 34%;
+}
+
+.gif iframe {
+  width: 100%;
+  height: 100%;
+}
+.image{
+  height: 120px;
+  width: 400px;
 }

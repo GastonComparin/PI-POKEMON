@@ -3,6 +3,8 @@ import axios from "axios";
 import { validate } from "./Validation";
 import style from "./Form.module.css";
 const Form = () => {
+  const [info, setInfo] = useState(false);
+
   const [form, setForm] = useState({
     name: "",
     health: "",
@@ -56,15 +58,19 @@ const Form = () => {
           error.response.data.errors
         ) {
           const errors = error.response.data.errors;
-      
+
           alert("Debe completar los campos obligatorios");
         } else {
           alert(`Error: ${error.message}`);
         }
       });
   };
+
+  const handleInfo = () => {
+    !info ? setInfo(true) : setInfo(false);
+  };
   return (
-    <div>
+    <div className={style.generalContainer}>
       <h1 className={style.titulo}>Create your Pokemon!</h1>
       <div className={style.container}>
         <form onSubmit={submitHandler}>
@@ -163,13 +169,21 @@ const Form = () => {
 
             <div className={style.campo}>
               <label className={style.label}>types</label>
-              <br />{" "}
+              <br />
               <input
                 name="types"
                 type="text"
                 value={form.types}
                 onChange={changeHandler}
               />
+              <button
+                className={style.infoBtn}
+                type="button"
+                onClick={handleInfo}
+              >
+                i
+              </button>
+
               {errors.types && (
                 <div style={{ color: "red" }}>{errors.types}</div>
               )}
@@ -193,7 +207,38 @@ const Form = () => {
           </div>
         </form>
       </div>
-      
+
+      {info ? (
+        <div className={style.listContainer}>
+          <div className={style.title}>
+            <h2>Pokemon Types</h2>
+          </div>
+          <div className={style.list}>
+            <p>rock</p>
+            <p>water</p>
+            <p>normal</p>
+            <p>fighting</p>
+            <p>flying</p>
+            <p>poison</p>
+            <p>ground</p>
+            <p>bug</p>
+            <p>ghost</p>
+            <p>steel</p>
+            <p>fire</p>
+            <p>grass</p>
+            <p>electric</p>
+            <p>psychic</p>
+            <p>ice</p>
+            <p>dragon</p>
+            <p>dark</p>
+            <p>fairy</p>
+            <p>unknown</p>
+            <p>shadow</p>
+          </div>
+        </div>
+      ) : (
+        <div />
+      )}
     </div>
   );
 };

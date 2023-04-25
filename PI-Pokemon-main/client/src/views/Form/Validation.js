@@ -49,7 +49,11 @@ export const validate = (field, value) => {
   if (field === "types") {
     if (!value) {
       errors.types = "types es obligatorio";
-    } else if (!/^(\b(rock|water|normal)\b\s*)+$/.test(value)) {
+    } else if (
+      !/^(\b(rock|water|normal|fighting|fliying|poison|ground|bug|ghost|steel|fire|grass|electric|psychic|ice|dragon|dark|fairy|unknown|shadow)\b\s*)+$/.test(
+        value
+      )
+    ) {
       errors.types = "Debe pertenecer a un type correcto";
     }
   }

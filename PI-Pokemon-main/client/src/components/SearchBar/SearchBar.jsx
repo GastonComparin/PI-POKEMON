@@ -6,8 +6,7 @@ import { getPokemonsByName, getPokemonsById } from "../../redux/actions";
 const SearchBar = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
-  
-  
+
   const handleInputChange = (e) => {
     e.preventDefault();
     setName(e.target.value);
@@ -35,6 +34,7 @@ const SearchBar = () => {
         className={style.input}
       />
       <button
+        className={style.button}
         onClick={(e) => {
           handleInputSubmit(e);
         }}

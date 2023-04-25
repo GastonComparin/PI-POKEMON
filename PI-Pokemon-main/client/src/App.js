@@ -1,5 +1,14 @@
 import "./App.css";
-import { Home, Landing, Form, Detail, About, NavBar, Update} from "./views/index";
+import {
+  Home,
+  Landing,
+  Form,
+  Detail,
+  About,
+  NavBar,
+  Update,
+  NotFound,
+} from "./views/index";
 import { Route, useLocation } from "react-router-dom";
 function App() {
   const location = useLocation();
@@ -15,10 +24,11 @@ function App() {
 
       <Route path="/updateall" component={Home} />
 
-
       <Route path="/detail/:id" component={Detail} />
 
       <Route path="/about" component={About} />
+
+      {/* {location.pathname === "*" && <NotFound />} */}
 
       {location.pathname !== "/" && <NavBar />}
     </div>

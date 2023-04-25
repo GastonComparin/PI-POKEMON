@@ -11,9 +11,17 @@ import { useDispatch, useSelector } from "react-redux";
 const Home = ({ match }) => {
   const dispatch = useDispatch();
 
+  const gifs = [
+    "https://i.giphy.com/media/h2zhIZFmeueAw/giphy.webp",
+    "https://i.giphy.com/media/ukpwkOzk6kafXwfwbH/giphy.webp",
+    "https://i.giphy.com/media/lM86pZcDxfx5e/giphy.webp",
+    "https://i.giphy.com/media/428dIJljoEbxS/giphy.webp",
+  ];
+
   //* BAJAR ESTADO
   const pokemon = useSelector((state) => state.pokemon);
   const [isLoading, setIsLoading] = useState(true);
+  const [gifIndex, setGifIndex] = useState(0);
   //*PAGINACION
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 12;
@@ -21,7 +29,8 @@ const Home = ({ match }) => {
   useEffect(() => {
     dispatch(getTypes());
     dispatch(getPokemons()).then(() => setIsLoading(false));
-  }, [dispatch]);
+    setGifIndex(Math.floor(Math.random() * gifs.length));
+  }, [dispatch, gifs.length]);
 
   //!FUNCIONES
   const handleClick = (event) => {
@@ -30,37 +39,50 @@ const Home = ({ match }) => {
 
   return (
     <div>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          <h1>POKEMON</h1>
-          <div>
-            <div className={style.container}>
-              
-             
-                <div className={style.options}>
-                  <Filter />
-                  <Order />
-                </div>
-              <div className={style.movement}>
-                <Pagination
-                  totalPages={Math.ceil(pokemon.length / cardsPerPage)}
-                  currentPage={currentPage}
-                  handleClick={handleClick}
-                />
-                <RefreshButton />
-              </div>
-              <div className={style.optionsContainer}>
-              <CardsContainer
-                cardsPerPage={cardsPerPage}
-                currentPage={currentPage}
-                isFiltered={match.params.source === "DB"}
-              />
-            </div>
-            </div>
+      <div>
+        <h1>
+          <img
+            className={style.image}
+            src="https://i.postimg.cc/43DG6P8q/pngegg-1.png"
+            alt=""
+          />
+        </h1>
+        <div className={style.container}>
+          <div className={style.options}>
+            <Filter />
+            <Order />
+          </div>
+          <div className={style.movement}>
+            <Pagination
+              totalPages={Math.ceil(pokemon.length / cardsPerPage)}
+              currentPage={currentPage}
+              handleClick={handleClick}
+            />
+            <RefreshButton />
+          </div>
+
+          <div className={style.optionsContainer}>
+            <CardsContainer
+              cardsPerPage={cardsPerPage}
+              currentPage={currentPage}
+              isLoading={isLoading}
+            />
           </div>
         </div>
+      </div>
+      {isLoading ? (
+        <p className={style.gif}>
+          <iframe
+            title="loading"
+            src={gifs[gifIndex]}
+            width="480"
+            height="300"
+            frameBorder="0"
+            allowFullScreen
+          ></iframe>
+        </p>
+      ) : (
+        <div></div>
       )}
     </div>
   );

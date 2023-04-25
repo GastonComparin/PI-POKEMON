@@ -1,5 +1,10 @@
+.generalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .container {
-  margin-left: 37%;
   height: fit-content;
   border: 3px solid #122620;
   width: 330px;
@@ -22,8 +27,8 @@
   background-color: #122620;
   padding-bottom: 10px;
 }
+
 .titulo {
-  margin-left: 37%;
   width: 330px;
   border: 3px solid #122620;
   background-color: #b68d40;
@@ -47,4 +52,34 @@
 
 .campoid {
   display: none;
+}
+.listContainer {
+  position: absolute;
+  top: 280px;
+  left: 900px;
+  height: 400px;
+  width: 400px;
+  background-color: #122620;
+}
+
+.title {
+  color: #d6ad60;
+}
+.list {
+  text-transform: capitalize;
+  text-align: center;
+  background-color: #b68d40;
+  column-count: 2;
+  height: 100%;
+  width: 100%;
+}
+.infoBtn {
+  cursor: pointer;
+  color: #d6ad60;
+  background-color: #122620;
+}
+.infoBtn:hover {
+  background-color: #d6ad60;
+  color: #122620;
+  transition: all 0.2s ease-in-out;
 }

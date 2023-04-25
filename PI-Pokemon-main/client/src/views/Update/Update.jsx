@@ -8,6 +8,7 @@ const Update = () => {
   const currentUrl = window.location.href;
   const id = currentUrl.split("/").pop();
   const willModify = useSelector((state) => state.modifiedPokemon);
+  const [info, setInfo] = useState(false);
 
   const [form, setForm] = useState({
     name: "",
@@ -94,9 +95,11 @@ const Update = () => {
     types: form.types,
     image: form.image,
   };
-
+  const handleInfo = () => {
+    !info ? setInfo(true) : setInfo(false);
+  };
   return (
-    <div>
+    <div className={style.generalContainer}>
       <h1 className={style.titulo}>Update your Pokemon!</h1>
       <div className={style.container}>
         <form onSubmit={submitHandler}>
@@ -111,7 +114,6 @@ const Update = () => {
                 value={`${id}`}
                 onChange={changeHandler}
                 readOnly={true}
-                
               />
               {errors.id && <div style={{ color: "red" }}>{errors.id}</div>}
             </div>
@@ -216,6 +218,13 @@ const Update = () => {
                 value={form.types}
                 onChange={changeHandler}
               />
+              <button
+                className={style.infoBtn}
+                type="button"
+                onClick={handleInfo}
+              >
+                i
+              </button>
               {errors.types && (
                 <div style={{ color: "red" }}>{errors.types}</div>
               )}
@@ -239,6 +248,37 @@ const Update = () => {
           </div>
         </form>
       </div>
+      {info ? (
+      <div className={style.listContainer}>
+        <div className={style.title}>
+          <h2>Pokemon Types</h2>
+        </div>
+        <div className={style.list}>
+          <p>rock</p>
+          <p>water</p>
+          <p>normal</p>
+          <p>fighting</p>
+          <p>flying</p>
+          <p>poison</p>
+          <p>ground</p>
+          <p>bug</p>
+          <p>ghost</p>
+          <p>steel</p>
+          <p>fire</p>
+          <p>grass</p>
+          <p>electric</p>
+          <p>psychic</p>
+          <p>ice</p>
+          <p>dragon</p>
+          <p>dark</p>
+          <p>fairy</p>
+          <p>unknown</p>
+          <p>shadow</p>
+        </div>
+      </div>
+      ) : (
+      <div />
+      )}
     </div>
   );
 };

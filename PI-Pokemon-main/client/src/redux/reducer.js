@@ -11,6 +11,7 @@ import {
   CLEAN_DETAIL,
   DELETE_POKEMON,
   MODIFY_POKEMON,
+
 } from "./actions";
 
 const initialState = {
@@ -44,6 +45,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pokemonDetail: {},
       };
+   
     //!CASOS SEARCH
     case SEARCH_BY_NAME:
       return {
@@ -54,7 +56,10 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, pokemon: action.payload };
     //!CASOS DE FILTRADO
     case FILTER_BY_SOURCE:
+
+      //? si no hay un filtro aplicado vamos por aca
       if (!state.doubleFilter.length > 0) {
+
         let filteredPokemons;
         if (action.payload === "ALL") {
           filteredPokemons = state.allPokemonsFilter;
@@ -83,6 +88,9 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           doubleFilter: [...filteredPokemons],
         };
+
+        //? si hay un filtro aplicado vamos por aca
+
       } else {
         let filteredPokemons;
         if (action.payload === "ALL") {
@@ -117,6 +125,8 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case FILTER_BY_TYPE:
+
+      //? si no hay un filtro aplicado vamos por aca
       if (!state.doubleFilter.length > 0) {
         let filteredPokemons;
         if (action.payload === "ALL") {
@@ -131,6 +141,7 @@ const rootReducer = (state = initialState, action) => {
           pokemon: [...filteredPokemons],
           doubleFilter: [...filteredPokemons],
         };
+        //? si hay un filtro aplicado vamos por aca
       } else {
         let filteredPokemons;
         if (action.payload === "ALL") {

@@ -5,4 +5,6 @@ import Detail from "./Detail/Detail";
 import About from "./About/About";
 import NavBar from "../components/NavBar/NavBar";
 import Update from "./Update/Update";
-export { Home, Landing, Form, Detail, About, NavBar, Update };
+import NotFound from "./404/NotFound";
+
+export { Home, Landing, Form, Detail, About, NavBar, Update, NotFound };

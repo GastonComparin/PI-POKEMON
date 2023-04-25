@@ -12,6 +12,7 @@ export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const DELETE_POKEMON = "DELETE_POKEMON";
 export const MODIFY_POKEMON = "MODIFY_POKEMON";
 
+
 //!ACTIONS DE GET
 export const getTypes = () => {
   return async function (dispatch) {
@@ -27,7 +28,6 @@ export const getPokemons = () => {
     dispatch({ type: GET_POKEMONS, payload: pokemons });
   };
 };
-
 export const getPokemonsByName = (payload) => {
   return async function (dispatch) {
     const json = await axios.get(
@@ -57,6 +57,7 @@ export const getPokemonDetail = (id) => {
 export const cleanDetail = () => {
   return { type: CLEAN_DETAIL };
 };
+
 //!ACTIONS DE FILTER
 export const filterSource = (payload) => {
   return {

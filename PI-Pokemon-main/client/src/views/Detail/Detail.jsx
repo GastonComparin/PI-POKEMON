@@ -29,7 +29,8 @@ const Detail = () => {
   const handleModify = (id) => {
     dispatch(modifyPokemon(pokemon.id));
   };
-
+console.log(pokemon.name);
+console.log(pokemon.types);
   return (
     <div>
       {pokemon?.name ? (
@@ -76,7 +77,16 @@ const Detail = () => {
           </div>
         </div>
       ) : (
-        <h3 className={style.loading}>Loading ...</h3>
+        <h3 className={style.loading}>
+          <iframe
+          title="loading"
+            src=" https://i.giphy.com/media/DRfu7BT8ZK1uo/giphy.webp"
+            width="480"
+            height="300"
+            frameBorder="0"
+            allowFullScreen
+          ></iframe>
+        </h3>
       )}
     </div>
   );

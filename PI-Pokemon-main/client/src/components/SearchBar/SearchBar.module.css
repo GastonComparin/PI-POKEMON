@@ -1,9 +1,17 @@
-.input{
-    border-radius: 10px;
-    width: 80%;
+.input {
+  border-radius: 10px;
+  width: 80%;
 }
-.container{
-    border-top: 3px solid #122620;
-    border-bottom: 3px solid #122620;
-    padding-bottom: 20px;
+.container {
+  border-top: 3px solid #122620;
+  border-bottom: 3px solid #122620;
+  padding-bottom: 20px;
+}
+.button {
+  color: #d6ad60;
+  background-color: #122620;
+  border-radius: 15px;
+  margin-left: 12px;
+  margin-right: 12px;
+  cursor: pointer;
 }
