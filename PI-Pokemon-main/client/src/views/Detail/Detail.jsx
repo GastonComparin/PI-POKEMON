@@ -29,8 +29,7 @@ const Detail = () => {
   const handleModify = (id) => {
     dispatch(modifyPokemon(pokemon.id));
   };
-console.log(pokemon.name);
-console.log(pokemon.types);
+
   return (
     <div>
       {pokemon?.name ? (

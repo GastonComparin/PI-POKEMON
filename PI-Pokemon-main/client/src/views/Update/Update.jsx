@@ -9,7 +9,28 @@ const Update = () => {
   const id = currentUrl.split("/").pop();
   const willModify = useSelector((state) => state.modifiedPokemon);
   const [info, setInfo] = useState(false);
-
+  const opciones = [
+    "rock",
+    "water",
+    "normal",
+    "fighting",
+    "flying",
+    "poison",
+    "ground",
+    "bug",
+    "ghost",
+    "steel",
+    "fire",
+    "grass",
+    "electric",
+    "psychic",
+    "ice",
+    "dragon",
+    "dark",
+    "fairy",
+    "unknown",
+    "shadow",
+  ];
   const [form, setForm] = useState({
     name: "",
     health: "",
@@ -54,49 +75,56 @@ const Update = () => {
     setErrors({ ...errors, [field]: fieldErrors[field] });
     setForm({ ...form, [field]: value });
   };
-  const submitHandler = (event) => {
-    event.preventDefault();
-    axios
-      .put(`http://localhost:3001/pokemon/update/`, object)
-      .then((res) => {
-        const message = res.data.pokemon;
-        const regex = /with id: ([\w-]+)/;
-        const match = regex.exec(message);
-        const id = match[1];
 
-        alert("Pokemon creado correctamente");
-        const viewPokemonBtn = document.createElement("a");
-        viewPokemonBtn.setAttribute("href", `detail/${id}`);
-        viewPokemonBtn.textContent = "Ver Pokemon";
-        document.body.appendChild(viewPokemonBtn);
-      })
-      .catch((error) => {
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.errors
-        ) {
-          const errors = error.response.data.errors;
-          alert("Debe completar los campos obligatorios");
-        } else {
-          alert(`Pokemon actualizado correctamente`);
-        }
-      });
+  const submitHandler = () => {
+    const object = objectLoader();
+    if (form.types.length !== 0) {
+      axios
+        .put(`http://localhost:3001/pokemon/update/`, object)
+        .then((res) => {
+          alert("Pokemon actualizado correctamente correctamente");
+        })
+        .catch((error) => {
+          if (
+            error.response &&
+            error.response.data &&
+            error.response.data.errors
+          ) {
+            const errors = error.response.data.errors;
+            alert("Debe completar los campos obligatorios");
+          }
+        });
+    } else {
+      alert("Debe seleccionar al menos un type");
+    }
   };
-  const object = {
-    id: id,
-    name: form.name,
-    health: form.health,
-    attack: form.attack,
-    defense: form.defense,
-    speed: form.speed,
-    height: form.height,
-    weight: form.weight,
-    types: form.types,
-    image: form.image,
+  const objectLoader = () => {
+    const types = selectedTypes();
+    form.types = types;
+    const object = {
+      id: id,
+      name: form.name,
+      health: form.health,
+      attack: form.attack,
+      defense: form.defense,
+      speed: form.speed,
+      height: form.height,
+      weight: form.weight,
+      types: form.types,
+      image: form.image,
+    };
+    return object;
   };
-  const handleInfo = () => {
-    !info ? setInfo(true) : setInfo(false);
+
+  const selectedTypes = () => {
+    const checkboxes = document.getElementsByName("opciones");
+    const valoresSeleccionados = [];
+    for (let i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked) {
+        valoresSeleccionados.push(checkboxes[i].value);
+      }
+    }
+    return valoresSeleccionados;
   };
   return (
     <div className={style.generalContainer}>
@@ -211,23 +239,18 @@ const Update = () => {
 
             <div className={style.campo}>
               <label className={style.label}>types</label>
-              <br />{" "}
-              <input
-                name="types"
-                type="text"
-                value={form.types}
-                onChange={changeHandler}
-              />
-              <button
-                className={style.infoBtn}
-                type="button"
-                onClick={handleInfo}
-              >
-                i
-              </button>
-              {errors.types && (
-                <div style={{ color: "red" }}>{errors.types}</div>
-              )}
+              <br />
+              {opciones.map((opcion) => (
+                <div key={opcion}>
+                  <input
+                    type="checkbox"
+                    id={`opcion-${opcion}`}
+                    name="opciones"
+                    value={opcion}
+                  />
+                  <label htmlFor={`opcion-${opcion}`}>{opcion}</label>
+                </div>
+              ))}
             </div>
             <div className={style.campo}>
               <label className={style.label}>image</label>
@@ -248,37 +271,6 @@ const Update = () => {
           </div>
         </form>
       </div>
-      {info ? (
-      <div className={style.listContainer}>
-        <div className={style.title}>
-          <h2>Pokemon Types</h2>
-        </div>
-        <div className={style.list}>
-          <p>rock</p>
-          <p>water</p>
-          <p>normal</p>
-          <p>fighting</p>
-          <p>flying</p>
-          <p>poison</p>
-          <p>ground</p>
-          <p>bug</p>
-          <p>ghost</p>
-          <p>steel</p>
-          <p>fire</p>
-          <p>grass</p>
-          <p>electric</p>
-          <p>psychic</p>
-          <p>ice</p>
-          <p>dragon</p>
-          <p>dark</p>
-          <p>fairy</p>
-          <p>unknown</p>
-          <p>shadow</p>
-        </div>
-      </div>
-      ) : (
-      <div />
-      )}
     </div>
   );
 };

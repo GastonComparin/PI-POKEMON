@@ -1,6 +1,9 @@
 import Home from "../src/views/Home/Home";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
-test("El componente Home debe tener un h1 en su retorno", () => {
-  const wrapper = shallow(<Home />);
-  expect(wrapper.contains(<h1>Título de la página</h1>)).toBe(true);
-});
+test('El componente Home debe contener un elemento h1 con un texto específico', () => {
+    render(<Home />);
+    const h1Element = screen.getByRole('heading', { name: /título de la página/i });
+    expect(h1Element).toBeInTheDocument();
+  });

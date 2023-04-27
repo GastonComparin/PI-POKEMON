@@ -11,7 +11,6 @@ import {
   CLEAN_DETAIL,
   DELETE_POKEMON,
   MODIFY_POKEMON,
-
 } from "./actions";
 
 const initialState = {
@@ -21,6 +20,7 @@ const initialState = {
   pokemonDetail: [],
   doubleFilter: [],
   modifiedPokemon: [],
+  filteredtype: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -45,7 +45,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pokemonDetail: {},
       };
-   
+
     //!CASOS SEARCH
     case SEARCH_BY_NAME:
       return {
@@ -54,18 +54,19 @@ const rootReducer = (state = initialState, action) => {
       };
     case SEARCH_BY_ID:
       return { ...state, pokemon: action.payload };
+
     //!CASOS DE FILTRADO
     case FILTER_BY_SOURCE:
-
-      //? si no hay un filtro aplicado vamos por aca
-      if (!state.doubleFilter.length > 0) {
-
-        let filteredPokemons;
+      const vacio = state.filteredtype.length;
+      let filteredPokemons;
+      if (vacio === 0) {
+        console.log("No hay nada en double, vamos a aplicar el primer filtro");
         if (action.payload === "ALL") {
           filteredPokemons = state.allPokemonsFilter;
           return {
             ...state,
             pokemon: filteredPokemons,
+            doubleFilter: filteredPokemons,
           };
         } else if (action.payload === "API") {
           filteredPokemons = state.allPokemonsFilter.filter(
@@ -74,6 +75,7 @@ const rootReducer = (state = initialState, action) => {
           return {
             ...state,
             pokemon: filteredPokemons,
+            doubleFilter: filteredPokemons,
           };
         } else if (action.payload === "DB") {
           filteredPokemons = state.allPokemonsFilter.filter((poke) =>
@@ -82,26 +84,25 @@ const rootReducer = (state = initialState, action) => {
           return {
             ...state,
             pokemon: filteredPokemons,
+            doubleFilter: filteredPokemons,
           };
         }
         return {
           ...state,
-          doubleFilter: [...filteredPokemons],
+          pokemon: [...filteredPokemons],
         };
-
-        //? si hay un filtro aplicado vamos por aca
-
       } else {
-        let filteredPokemons;
+        console.log(
+          "Ya tiene el primer filtro de type, asique arreglamos source"
+        );
         if (action.payload === "ALL") {
-          filteredPokemons = state.doubleFilter;
+          filteredPokemons = state.filteredtype;
           return {
             ...state,
             pokemon: filteredPokemons,
           };
-        }
-        if (action.payload === "API") {
-          filteredPokemons = state.doubleFilter.filter(
+        } else if (action.payload === "API") {
+          filteredPokemons = state.filteredtype.filter(
             (poke) => !isNaN(poke.id)
           );
           return {
@@ -109,7 +110,7 @@ const rootReducer = (state = initialState, action) => {
             pokemon: filteredPokemons,
           };
         } else if (action.payload === "DB") {
-          filteredPokemons = state.doubleFilter.filter((poke) =>
+          filteredPokemons = state.filteredtype.filter((poke) =>
             isNaN(poke.id)
           );
           return {
@@ -119,44 +120,53 @@ const rootReducer = (state = initialState, action) => {
         }
         return {
           ...state,
-          pokemon: [...filteredPokemons],
-          doubleFilter: [...filteredPokemons],
+          pokemon: filteredPokemons,
         };
       }
 
     case FILTER_BY_TYPE:
-
-      //? si no hay un filtro aplicado vamos por aca
-      if (!state.doubleFilter.length > 0) {
-        let filteredPokemons;
+      let filteredTypePokemons;
+      if (state.doubleFilter.length > 0) {
+        console.log("tiene algo en el double asique vamos a combinar");
         if (action.payload === "ALL") {
-          filteredPokemons = state.allPokemonsFilter;
+          filteredTypePokemons = state.doubleFilter;
         } else {
-          filteredPokemons = state.allPokemonsFilter.filter((poke) => {
-            return poke.types.includes(action.payload);
-          });
+          filteredTypePokemons = state.doubleFilter.filter((poke) =>
+            poke.types.includes(action.payload)
+          );
+          return {
+            ...state,
+            pokemon: filteredTypePokemons,
+            filteredtype: filteredTypePokemons,
+          };
         }
         return {
           ...state,
-          pokemon: [...filteredPokemons],
-          doubleFilter: [...filteredPokemons],
+          pokemon: [...filteredTypePokemons],
         };
-        //? si hay un filtro aplicado vamos por aca
       } else {
-        let filteredPokemons;
+        console.log(
+          "no hay nada en el double, asique vamos a aplicar solo type"
+        );
         if (action.payload === "ALL") {
-          filteredPokemons = state.allPokemonsFilter;
+          filteredTypePokemons = state.allPokemonsFilter;
         } else {
-          filteredPokemons = state.allPokemonsFilter.filter((poke) => {
-            return poke.types.includes(action.payload);
-          });
+          filteredTypePokemons = state.allPokemonsFilter.filter((poke) =>
+            poke.types.includes(action.payload)
+          );
+          return {
+            ...state,
+            pokemon: filteredTypePokemons,
+            filteredtype: filteredTypePokemons,
+          };
         }
         return {
           ...state,
-          pokemon: [...filteredPokemons],
-          doubleFilter: [...filteredPokemons],
+          pokemon: [...filteredTypePokemons],
+          filteredtype: filteredTypePokemons,
         };
       }
+
     //!CASOS DE ORDEN
     case ORDER_BY_NAME:
       let orderName;

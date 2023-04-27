@@ -31,32 +31,27 @@ export const validate = (field, value) => {
     }
   }
   if (field === "speed") {
-    if (value && !/^[0-9]+$/.test(value)) {
+    if (!value) {
+      errors.speed = "speed es obligatorio";
+    } else if (!/^[0-9]+$/.test(value)) {
       errors.speed = "speed debe ser un número entero.";
     }
   }
   if (field === "height") {
-    if (value && !/^[0-9]+$/.test(value)) {
+    if (!value) {
+      errors.height = "height es obligatorio";
+    } else if (!/^[0-9]+$/.test(value)) {
       errors.height = "height debe ser un número entero.";
     }
   }
   if (field === "weight") {
-    if (value && !/^[0-9]+$/.test(value)) {
+    if (!value) {
+      errors.weight = "weight es obligatorio";
+    } else if (!/^[0-9]+$/.test(value)) {
       errors.weight = "weight debe ser un número entero.";
     }
   }
 
-  if (field === "types") {
-    if (!value) {
-      errors.types = "types es obligatorio";
-    } else if (
-      !/^(\b(rock|water|normal|fighting|fliying|poison|ground|bug|ghost|steel|fire|grass|electric|psychic|ice|dragon|dark|fairy|unknown|shadow)\b\s*)+$/.test(
-        value
-      )
-    ) {
-      errors.types = "Debe pertenecer a un type correcto";
-    }
-  }
   if (field === "image") {
     if (value && !/(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/i.test(value)) {
       errors.image = "Debe ser un link";

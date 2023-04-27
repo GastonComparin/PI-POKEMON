@@ -2,9 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { validate } from "./Validation";
 import style from "./Form.module.css";
-const Form = () => {
-  const [info, setInfo] = useState(false);
 
+const Form = () => {
   const [form, setForm] = useState({
     name: "",
     health: "",
@@ -28,6 +27,28 @@ const Form = () => {
     types: [],
     image: "",
   });
+  const opciones = [
+    "rock",
+    "water",
+    "normal",
+    "fighting",
+    "flying",
+    "poison",
+    "ground",
+    "bug",
+    "ghost",
+    "steel",
+    "fire",
+    "grass",
+    "electric",
+    "psychic",
+    "ice",
+    "dragon",
+    "dark",
+    "fairy",
+    "unknown",
+    "shadow",
+  ];
 
   const changeHandler = (event) => {
     const field = event.target.name;
@@ -38,37 +59,43 @@ const Form = () => {
   };
   const submitHandler = (event) => {
     event.preventDefault();
-    axios
-      .post("http://localhost:3001/pokemon", form)
-      .then((res) => {
-        const message = res.data.pokemon;
-        const regex = /with id: ([\w-]+)/;
-        const match = regex.exec(message);
-        const id = match[1];
-        alert("Pokemon creado correctamente");
-        const viewPokemonBtn = document.createElement("a");
-        viewPokemonBtn.setAttribute("href", `detail/${id}`);
-        viewPokemonBtn.textContent = "Ver Pokemon";
-        document.body.appendChild(viewPokemonBtn);
-      })
-      .catch((error) => {
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.errors
-        ) {
-          const errors = error.response.data.errors;
+    const types = selectedTypes();
+    form.types = types;
+    console.log(form.types);
+    if (form.types.length !== 0) {
+      axios
+        .post("http://localhost:3001/pokemon", form)
+        .then((res) => {
+          alert("Pokemon creado correctamente");
+        })
+        .catch((error) => {
+          if (
+            error.response &&
+            error.response.data &&
+            error.response.data.errors
+          ) {
+            const errors = error.response.data.errors;
 
-          alert("Debe completar los campos obligatorios");
-        } else {
-          alert(`Error: ${error.message}`);
-        }
-      });
+            alert("Debe completar los campos obligatorios");
+          } else {
+            alert(`este Error: ${error.message}`);
+          }
+        });
+    } else {
+      alert("Debe seleccionar al menos un type");
+    }
+  };
+  const selectedTypes = () => {
+    const checkboxes = document.getElementsByName("opciones");
+    const valoresSeleccionados = [];
+    for (let i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked) {
+        valoresSeleccionados.push(checkboxes[i].value);
+      }
+    }
+    return valoresSeleccionados;
   };
 
-  const handleInfo = () => {
-    !info ? setInfo(true) : setInfo(false);
-  };
   return (
     <div className={style.generalContainer}>
       <h1 className={style.titulo}>Create your Pokemon!</h1>
@@ -170,24 +197,20 @@ const Form = () => {
             <div className={style.campo}>
               <label className={style.label}>types</label>
               <br />
-              <input
-                name="types"
-                type="text"
-                value={form.types}
-                onChange={changeHandler}
-              />
-              <button
-                className={style.infoBtn}
-                type="button"
-                onClick={handleInfo}
-              >
-                i
-              </button>
 
-              {errors.types && (
-                <div style={{ color: "red" }}>{errors.types}</div>
-              )}
+              {opciones.map((opcion) => (
+                <div key={opcion}>
+                  <input
+                    type="checkbox"
+                    id={`opcion-${opcion}`}
+                    name="opciones"
+                    value={opcion}
+                  />
+                  <label htmlFor={`opcion-${opcion}`}>{opcion}</label>
+                </div>
+              ))}
             </div>
+
             <div className={style.campo}>
               <label className={style.label}>image</label>
               <br />
@@ -207,38 +230,6 @@ const Form = () => {
           </div>
         </form>
       </div>
-
-      {info ? (
-        <div className={style.listContainer}>
-          <div className={style.title}>
-            <h2>Pokemon Types</h2>
-          </div>
-          <div className={style.list}>
-            <p>rock</p>
-            <p>water</p>
-            <p>normal</p>
-            <p>fighting</p>
-            <p>flying</p>
-            <p>poison</p>
-            <p>ground</p>
-            <p>bug</p>
-            <p>ghost</p>
-            <p>steel</p>
-            <p>fire</p>
-            <p>grass</p>
-            <p>electric</p>
-            <p>psychic</p>
-            <p>ice</p>
-            <p>dragon</p>
-            <p>dark</p>
-            <p>fairy</p>
-            <p>unknown</p>
-            <p>shadow</p>
-          </div>
-        </div>
-      ) : (
-        <div />
-      )}
     </div>
   );
 };

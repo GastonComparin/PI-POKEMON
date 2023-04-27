@@ -36,6 +36,16 @@ const Home = ({ match }) => {
   const handleClick = (event) => {
     setCurrentPage(Number(event.target.id));
   };
+  const handlePrev = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+  const handleNext = () => {
+    if (currentPage < Math.ceil(pokemon.length / cardsPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <div>
@@ -49,14 +59,15 @@ const Home = ({ match }) => {
         </h1>
         <div className={style.container}>
           <div className={style.options}>
-            <Filter />
+            <Filter setCurrentPage={setCurrentPage} />
             <Order />
           </div>
           <div className={style.movement}>
             <Pagination
               totalPages={Math.ceil(pokemon.length / cardsPerPage)}
-              currentPage={currentPage}
               handleClick={handleClick}
+              handlePrev={handlePrev}
+              handleNext={handleNext}
             />
             <RefreshButton />
           </div>

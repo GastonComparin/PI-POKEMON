@@ -1,12 +1,20 @@
 import style from "./Pagination.module.css";
 
-const Pagination = ({ totalPages, currentPage, handleClick }) => {
+const Pagination = ({
+  totalPages,
+  handleClick,
+  handlePrev,
+  handleNext,
+}) => {
   return (
     <div className={style.bigcontainer}>
       {totalPages === 0 ? (
         <div />
       ) : (
         <div className={style.container}>
+          <button className={style.button} onClick={handlePrev}>
+            Prev
+          </button>
           {Array.from({ length: totalPages }).map((item, index) => {
             return (
               <button
@@ -19,6 +27,9 @@ const Pagination = ({ totalPages, currentPage, handleClick }) => {
               </button>
             );
           })}
+          <button className={style.button} onClick={handleNext}>
+            Next
+          </button>
         </div>
       )}
     </div>
