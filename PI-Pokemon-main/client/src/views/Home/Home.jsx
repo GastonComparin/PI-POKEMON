@@ -8,7 +8,7 @@ import { getPokemons, getTypes } from "../../redux/actions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const Home = ({ match }) => {
+const Home = () => {
   const dispatch = useDispatch();
 
   const gifs = [
