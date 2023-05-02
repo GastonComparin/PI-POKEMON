@@ -10,9 +10,7 @@ const NavBar = () => {
       <div className={style.botones}>
         <Link to="/create">Create!</Link>
       </div>
-      <div className={style.botones}>
-        <Link to="/update">Update!</Link>
-      </div>
+
       <SearchBar />
       <div className={style.botones}>
         <Link to="/About">About</Link>

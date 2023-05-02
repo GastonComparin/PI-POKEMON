@@ -61,8 +61,18 @@ const Form = () => {
     event.preventDefault();
     const types = selectedTypes();
     form.types = types;
-    console.log(form.types);
-    if (form.types.length !== 0) {
+
+    if (
+      !errors.name &&
+      !errors.attack &&
+      !errors.defense &&
+      !errors.health &&
+      !errors.height &&
+      !errors.speed &&
+      !errors.weight &&
+      errors.image === "" &&
+      types.length > 0
+    ) {
       axios
         .post("http://localhost:3001/pokemon", form)
         .then((res) => {
@@ -78,11 +88,27 @@ const Form = () => {
 
             alert("Debe completar los campos obligatorios");
           } else {
-            alert(`este Error: ${error.message}`);
+            alert(`Error: ${error.message}`);
           }
         });
-    } else {
-      alert("Debe seleccionar al menos un type");
+    } else if (errors.name) {
+      alert("hay un error en el name");
+    } else if (errors.attack) {
+      alert("hay error en el campo attack");
+    } else if (errors.defense) {
+      alert("hay error en el campo defense");
+    } else if (errors.health) {
+      alert("hay error en el campo health");
+    } else if (errors.height) {
+      alert("hay error en el campo height");
+    } else if (errors.speed) {
+      alert("hay error en el campo speed");
+    } else if (errors.weight) {
+      alert("hay error en el campo weight");
+    } else if (errors.image) {
+      alert("hay error en el campo image");
+    } else if (errors.types) {
+      alert("debe seleccionar al menos un type");
     }
   };
   const selectedTypes = () => {
@@ -96,9 +122,34 @@ const Form = () => {
     return valoresSeleccionados;
   };
 
+  const handleRandom = () => {
+    const nombresPokemon = [
+      "Sparkleash",
+      "Florafin",
+      "Frosquid",
+      "Stonewyrm",
+      "Nightwingle",
+    ];
+    const maxStat = 100;
+    const minStat = 0;
+
+    setForm({
+      name: nombresPokemon[Math.floor(Math.random() * nombresPokemon.length)],
+      health: Math.floor(Math.random() * (maxStat - minStat) + minStat),
+      attack: Math.floor(Math.random() * (maxStat - minStat) + minStat),
+      defense: Math.floor(Math.random() * (maxStat - minStat) + minStat),
+      speed: Math.floor(Math.random() * (maxStat - minStat) + minStat),
+      height: Math.floor(Math.random() * (maxStat - minStat) + minStat),
+      weight: Math.floor(Math.random() * (maxStat - minStat) + minStat),
+      image: "https://placehold.it/200x200",
+    });
+  };
   return (
     <div className={style.generalContainer}>
       <h1 className={style.titulo}>Create your Pokemon!</h1>
+      <button className={style.button} onClick={handleRandom}>
+        randomize
+      </button>
       <div className={style.container}>
         <form onSubmit={submitHandler}>
           <div className={style.dataContainer}>
@@ -193,44 +244,41 @@ const Form = () => {
                 <div style={{ color: "red" }}>{errors.weight}</div>
               )}
             </div>
-
-            <div className={style.campo}>
-              <label className={style.label}>types</label>
-              <br />
-
-              {opciones.map((opcion) => (
-                <div key={opcion}>
-                  <input
-                    type="checkbox"
-                    id={`opcion-${opcion}`}
-                    name="opciones"
-                    value={opcion}
-                  />
-                  <label htmlFor={`opcion-${opcion}`}>{opcion}</label>
-                </div>
-              ))}
-            </div>
-
-            <div className={style.campo}>
-              <label className={style.label}>image</label>
-              <br />
-              <input
-                name="image"
-                type="text"
-                value={form.image}
-                onChange={changeHandler}
-              />
-              {errors.image && (
-                <div style={{ color: "red" }}>{errors.image}</div>
-              )}
-            </div>
-            <button type="submit" className={style.button}>
-              Submit
-            </button>
           </div>
+          <div className={style.campo}>
+            <label className={style.label}>types</label>
+            <br />
+
+            {opciones.map((opcion) => (
+              <div key={opcion}>
+                <input
+                  type="checkbox"
+                  id={`opcion-${opcion}`}
+                  name="opciones"
+                  value={opcion}
+                />
+                <label htmlFor={`opcion-${opcion}`}>{opcion}</label>
+              </div>
+            ))}
+          </div>
+          <div className={style.campo}>
+            <label className={style.label}>image</label>
+            <br />
+            <input
+              name="image"
+              type="text"
+              value={form.image}
+              onChange={changeHandler}
+            />
+            {errors.image && <div style={{ color: "red" }}>{errors.image}</div>}
+          </div>
+          <button type="submit" className={style.button}>
+            Submit
+          </button>
         </form>
       </div>
     </div>
   );
 };
+
 export default Form;

@@ -3,8 +3,10 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  
 }
 .container {
+  margin-top: 10px;
   height: fit-content;
   border: 3px solid #122620;
   width: 330px;
@@ -82,4 +84,7 @@
   background-color: #d6ad60;
   color: #122620;
   transition: all 0.2s ease-in-out;
+}
+.typecontainer {
+  background-color: red;
 }

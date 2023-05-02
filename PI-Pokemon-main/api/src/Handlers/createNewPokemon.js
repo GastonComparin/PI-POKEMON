@@ -34,7 +34,7 @@ const createNewPokemon = async (req, res) => {
         pokemon: newPokemon,
       });
   } catch (error) {
-    res.status(400).message("Hubo un error creando el pokemon");
+    res.status(400).json(error.message);
   }
 };
 module.exports = createNewPokemon;

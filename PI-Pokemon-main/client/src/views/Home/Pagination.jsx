@@ -1,3 +1,4 @@
+import { useState } from "react";
 import style from "./Pagination.module.css";
 
 const Pagination = ({
@@ -5,6 +6,8 @@ const Pagination = ({
   handleClick,
   handlePrev,
   handleNext,
+  handleStart,
+  currentPage,
 }) => {
   return (
     <div className={style.bigcontainer}>
@@ -12,8 +15,15 @@ const Pagination = ({
         <div />
       ) : (
         <div className={style.container}>
+          {currentPage !== 1 ? (
+            <button className={style.button} onClick={handleStart}>
+              &lt;&lt;
+            </button>
+          ) : (
+            <div />
+          )}
           <button className={style.button} onClick={handlePrev}>
-            Prev
+            &lt;
           </button>
           {Array.from({ length: totalPages }).map((item, index) => {
             return (
@@ -28,7 +38,7 @@ const Pagination = ({
             );
           })}
           <button className={style.button} onClick={handleNext}>
-            Next
+          &gt;
           </button>
         </div>
       )}

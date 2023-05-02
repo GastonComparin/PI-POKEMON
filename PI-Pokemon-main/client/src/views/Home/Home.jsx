@@ -46,6 +46,9 @@ const Home = () => {
       setCurrentPage(currentPage + 1);
     }
   };
+  const handleStart = () => {
+    setCurrentPage(1);
+  };
 
   return (
     <div>
@@ -68,8 +71,10 @@ const Home = () => {
               handleClick={handleClick}
               handlePrev={handlePrev}
               handleNext={handleNext}
+              handleStart={handleStart}
+              currentPage={currentPage}
             />
-            <RefreshButton />
+            {/* <RefreshButton /> */}
           </div>
 
           <div className={style.optionsContainer}>

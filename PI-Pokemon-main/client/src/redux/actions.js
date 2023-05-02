@@ -58,6 +58,7 @@ export const cleanDetail = () => {
   return { type: CLEAN_DETAIL };
 };
 
+
 //!ACTIONS DE FILTER
 export const filterSource = (payload) => {
   return {

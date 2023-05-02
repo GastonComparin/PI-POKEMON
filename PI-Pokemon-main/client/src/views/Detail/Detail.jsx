@@ -29,7 +29,7 @@ const Detail = () => {
   const handleModify = (id) => {
     dispatch(modifyPokemon(pokemon.id));
   };
-
+  console.log(pokemon);
   return (
     <div>
       {pokemon?.name ? (
@@ -55,6 +55,7 @@ const Detail = () => {
           ) : (
             <div />
           )}
+
           <div className={style.general}>
             <div className={style.containerdata}>
               <p className={style.id}> {pokemon?.id}</p>
@@ -78,7 +79,7 @@ const Detail = () => {
       ) : (
         <h3 className={style.loading}>
           <iframe
-          title="loading"
+            title="loading"
             src=" https://i.giphy.com/media/DRfu7BT8ZK1uo/giphy.webp"
             width="480"
             height="300"

@@ -40,8 +40,8 @@ const Order = () => {
         }}
       >
         <option>UNSORTED</option>
-        <option value="asc"> 0 - 100 </option>
-        <option value="desc"> 100 - 0 </option>
+        <option value="asc"> 100 - 0 </option>
+        <option value="desc"> 0 - 100 </option>
       </select>
     </div>
   );

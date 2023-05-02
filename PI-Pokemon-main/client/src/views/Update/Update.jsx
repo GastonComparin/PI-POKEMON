@@ -78,7 +78,17 @@ const Update = () => {
 
   const submitHandler = () => {
     const object = objectLoader();
-    if (form.types.length !== 0) {
+    if (
+      !errors.name &&
+      !errors.attack &&
+      !errors.defense &&
+      !errors.health &&
+      !errors.height &&
+      !errors.speed &&
+      !errors.weight &&
+      errors.image === "" 
+      // types.length > 0
+    ) {
       axios
         .put(`http://localhost:3001/pokemon/update/`, object)
         .then((res) => {
@@ -94,9 +104,26 @@ const Update = () => {
             alert("Debe completar los campos obligatorios");
           }
         });
-    } else {
-      alert("Debe seleccionar al menos un type");
-    }
+    } else if (errors.name) {
+      alert("hay un error en el name");
+    } else if (errors.attack) {
+      alert("hay error en el campo attack");
+    } else if (errors.defense) {
+      alert("hay error en el campo defense");
+    } else if (errors.health) {
+      alert("hay error en el campo health");
+    } else if (errors.height) {
+      alert("hay error en el campo height");
+    } else if (errors.speed) {
+      alert("hay error en el campo speed");
+    } else if (errors.weight) {
+      alert("hay error en el campo weight");
+    } else if (errors.image) {
+      alert("hay error en el campo image");
+    } 
+    // else if (errors.types) {
+    //   alert("debe seleccionar al menos un type");
+    // }
   };
   const objectLoader = () => {
     const types = selectedTypes();

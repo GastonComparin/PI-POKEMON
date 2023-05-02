@@ -4,13 +4,12 @@ import { useSelector } from "react-redux";
 
 const CardsContainer = ({ cardsPerPage, currentPage, isLoading }) => {
   const pokemon = useSelector((state) => state.pokemon);
-
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  let currentCards;
 
+  let currentCards;
   if (Array.isArray(pokemon)) {
-    currentCards = pokemon.slice(indexOfFirstCard, indexOfLastCard);
+    currentCards = pokemon?.slice(indexOfFirstCard, indexOfLastCard);
   } else {
     currentCards = [pokemon];
   }
@@ -31,7 +30,7 @@ const CardsContainer = ({ cardsPerPage, currentPage, isLoading }) => {
           ></iframe>
         </div>
       ) : (
-        currentCards.map((poke) => {
+        currentCards?.map((poke) => {
           return (
             <Card
               key={poke.id}
